@@ -9,10 +9,21 @@
 
 ## Installation <a name="installation"></a>
 The code should run using Python versions 3.*.
-To install the necessary dependencies you can run
-```
-$ pip install -r requirements.txt
-```
+The necessary libraries are:
+
+* pandas
+* re
+* sys
+* json
+* sklearn
+* nltk
+* sqlalchemy
+* pickle
+* Flask
+* plotly
+* sqlite3
+* joblib
+
 
 ## Quick Start <a name="quick_start"></a>
 Run the following commands in the project's root directory to set up database and model.
@@ -24,9 +35,9 @@ $ python data/process_data.py data/disaster_messages.csv data/disaster_categorie
 ```
 $ python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl
 ```
-3. Run the following command to run the web app: 
+3. To run the web app go to `app` directory and execute: 
 ```
-$ python app/run.py
+$ python run.py
 ```
 4. To open the web app go to http://0.0.0.0:3001/
 
@@ -35,8 +46,9 @@ If you are only interested in running the web app go directly to steps 3 and 4.
 ## Project Overview <a name="motivation"></a>
 In this project, I analyze disaster messages provided from Figure Eight `https://appen.com/` and build a web app that classifies messages
 using a ML pipeline into 36 categories.  This classification could potentially help so that a message sent during a disaster could be effectively redirected
-to the appropriate disaster relief agency. The dataset contains 30,000 messages drawn from events including an earthquake in Haiti in 2010, an earthquake in Chile in 2010,
-floods in Pakistan in 2010, super-storm Sandy in the U.S.A. in 2012, and news articles spanning a large number of years and 100s of different disasters. Some labels like aid-related, weather-related have much more entries compared to other categories, i.e. we have to deal with an imbalanced dataset. 
+to the appropriate disaster relief agency. The dataset contains 30,000 messages taken from events including an earthquake in Haiti in 2010, an earthquake in Chile in 2010,
+floods in Pakistan in 2010, super-storm Sandy in the U.S.A. in 2012, and news articles spanning a large number of years and 100s of different disasters. Some labels like aid-related, weather-related have much more entries compared to other categories, i.e. we have to deal with an imbalanced dataset. In the web app that is build with this training data one could
+enter any disaster related message and a classification to related categories will be given to the user as output.
 
 
 ## File Descriptions <a name="files"></a>
@@ -57,12 +69,11 @@ floods in Pakistan in 2010, super-storm Sandy in the U.S.A. in 2012, and news ar
 ├── <b>models</b> : It contains all ML files
 │ ├── <b>classifier.pkl</b> : classifier produced by train_classifier file
 │ └── <b>train_classifier.py</b> : ML pipeline classification code
-└── <b>requirements.txt</b>
  </code>
 </pre>
 
 The file `process_data.py` contains an ETL pipeline that:
-* Loads the `messages.csv` and `categories.csv` datasets
+* Loads the `disaster_messages.csv` and `disaster_categories.csv` datasets
 * Merges the two datasets
 * Cleans the data
 * Stores it in a SQLite database `DisasterResponse.db`
@@ -78,6 +89,9 @@ The file `train_classifier.py` contains a NLP and ML pipeline that:
 The file `run.py` contains a Flask web app that enables the user to enter a disaster message, and then view the categories of the message.
  The web app also contains some visualizations that describe the data used to train the model.
  
+## Results
+When a disaster message is submitted and the Classify Message button is clicked, the app shows how the message is classified by highlighting the categories in green. For example for the message "We have nothing to eat!" we get the following categories: 'Request', 'Aid Related', 'Food'.
+![Web app use picture](https://github.com/iris-theof/Disaster_response_pipeline/blob/master/screenshot_web_app.png)
  
 ## Licensing, Acknowledgements <a name="licensing"></a>
 Must give credit to **figure-8** that provided the data used in this repository. Feel free to use the code in this repository as you would like! 
